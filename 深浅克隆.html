@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let a={
+            x:1,
+            y:[1,2,3],
+            z:{
+                x:1
+            }
+        }
+        let b={};
+        // 浅克隆
+        b={...a};
+        // 深克隆
+        function deepclone(obj){
+            // 过滤特殊情况    
+            if(typeof obj !=="object") return obj
+            if(obj === null) return null
+            if(obj instanceof RegExp ){
+                return new RegExp(obj)
+            }
+            if(obj instanceof Date){
+                return new Date(obj)
+            }
+            let newobj=new obj.constructor;
+            for(let key in obj){
+                // 获取私有属性，不获取公共属性
+                if(obj.hasOwnProperty(key)){
+                    newobj[key]=deepclone(obj[key])
+                }
+            }
+            
+        }
+        console.log(b);
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
